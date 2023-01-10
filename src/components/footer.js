@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import { CtxConsumer } from '../App';
 class Footer extends Component{
     
     // createAlert(){
@@ -15,13 +15,37 @@ class Footer extends Component{
         this.setState({name: evt.target.value});
     }
     render (){
+        //const animals = ['cat', 'dog', 'horse'];
         return (
-            <React.Fragment>
-                <h2 onClick={this.props.myAlert}>{this.props.trademark}</h2>
-                <input value={this.state.name}
-                    onChange={this.changed.bind(this)} type='text' />
-            </React.Fragment>
-            )
+            <CtxConsumer>
+                {context => {
+                    return (<div>
+                        {console.log(context.animals)}
+                        {context.animals.map( (animal) => {
+                            return (
+                                <div key={animal}>
+                                    <h1> {animal}</h1>
+                                </div>
+                            );
+                        })}
+                    </div>)
+                    
+                }}
+
+            </CtxConsumer>
+            // {context => (
+            //     <div>
+            //         <h1>footer</h1>
+            //         {context.animals && context.animals.map(animal => {
+            //             return (
+            //                 <div key={animal}>
+            //                     <h1>{animal}</h1>
+            //                 </div>
+            //             );
+            //         }) }
+            //     </div>
+            // )}
+        )
     }
 }
 export default Footer;
